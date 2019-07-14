@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "980382965469",
+    "firebase_url": "https://fithome-prod.firebaseio.com",
+    "project_id": "fithome-prod",
+    "storage_bucket": "fithome-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980382965469:android:5abec741139a73a4",
+        "android_client_info": {
+          "package_name": "com.fitness.athome"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980382965469-iu5c3phivtjb68gvla42b49b6pbcaqgr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5xFHBT_gma3K6zAm75Gpg7Md3JFg4hpQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980382965469-iu5c3phivtjb68gvla42b49b6pbcaqgr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

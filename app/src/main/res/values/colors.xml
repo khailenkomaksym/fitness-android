@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#9ccc65</color>
+    <color name="colorPrimaryDark">#6b9b37</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="colorSelectedNavigationView">#7cb342</color>
+    <color name="colorSelectedNavigationViewBackgroundChecked">#ffffa6</color>
+    <color name="colorSelectedNavigationViewTextUnchecked">#686868</color>
+    <color name="colorSelectedNavigationViewTextChecked">#43a047</color>
 </resources>

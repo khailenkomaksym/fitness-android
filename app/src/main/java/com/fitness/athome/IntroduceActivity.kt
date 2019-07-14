@@ -1,4 +1,4 @@
-package com.fitness.app
+package com.fitness.athome
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
@@ -12,7 +12,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 
-class MainActivity : AppCompatActivity() {
+class IntroduceActivity : AppCompatActivity() {
 
     private lateinit var imgBg : ImageView
     private lateinit var imgFg : ImageView
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_introduce)
 
         imgBg = findViewById(R.id.img_bg)
         imgFg = findViewById(R.id.img_fg)
@@ -33,11 +33,11 @@ class MainActivity : AppCompatActivity() {
                     val color = getColour(imgFg, x, y)
 
                     if (color == Color.parseColor("#ff0000")) {
-                        Toast.makeText(this@MainActivity, "Press", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this@IntroduceActivity, "Press", Toast.LENGTH_LONG).show();
                     } else if (color == Color.parseColor("#00f6ff")) {
-                        Toast.makeText(this@MainActivity, "Biceps", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this@IntroduceActivity, "Biceps", Toast.LENGTH_LONG).show();
                     } else if (color == Color.parseColor("#fff600")) {
-                        Toast.makeText(this@MainActivity, "Legs", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this@IntroduceActivity, "Legs", Toast.LENGTH_LONG).show();
                     }
                 }
                 return true
