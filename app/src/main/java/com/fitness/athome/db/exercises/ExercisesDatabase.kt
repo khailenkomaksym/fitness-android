@@ -24,22 +24,11 @@ abstract class ExercisesDatabase : RoomDatabase() {
                 INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
 
-        /*private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context.applicationContext,
-                                ExercisesDatabase::class.java,
-                                "exercises.db")
-                .openHelperFactory(AssetSQLiteOpenHelperFactory())
-                .allowMainThreadQueries()
-                .build()*/
-
         private fun buildDatabase(context: Context) :ExercisesDatabase {
             val dbFile = context.getDatabasePath("exercises.db")
 
             if (!dbFile.exists()) {
-                Log.d("myLogs", "room-check database doesn't exists")
                 copyDatabaseFile(context, "exercises.db")
-            } else {
-                Log.d("myLogs", "room-check database exists")
             }
 
             return Room.databaseBuilder(
@@ -68,26 +57,13 @@ abstract class ExercisesDatabase : RoomDatabase() {
 
                 val buffer = ByteArray(8192)
 
-                Log.d("myLogs", "room-funct start")
-
-                /*var length: Int = 0
-
-                while (inputStream.read(buffer, 0, 8192).let { length = it; it > 0 }) {
-                    Log.d("myLogs", "room-funct process")
-                    output.write(buffer, 0, length)
-                }*/
-
                 var length = inputStream.read(buffer)
 
 
-                while (length    > 0 )
-
-                {
+                while (length > 0) {
                     output.write(buffer, 0, length)
                     length = inputStream.read(buffer)
                 }
-
-                Log.d("myLogs", "room-funct end")
 
                 output.flush()
                 output.close()
