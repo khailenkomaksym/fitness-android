@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="40dp">
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSignInFacebook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/auth_sign_in_with_facebook"
+                app:backgroundTint="@color/colorFacebookSignIn"
+                app:strokeColor="@color/colorWhite"
+                app:strokeWidth="1dp"
+                app:cornerRadius="30dp" />
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSignInGoogle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/auth_sign_in_with_google"
+                app:backgroundTint="@color/colorGoogleSignIn"
+                app:strokeColor="@color/colorWhite"
+                app:strokeWidth="1dp"
+                app:cornerRadius="30dp" />
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContinueAsGuest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/auth_continue_as_guest"
+                app:backgroundTint="@color/colorGray"
+                app:strokeColor="@color/colorWhite"
+                app:strokeWidth="1dp"
+                app:cornerRadius="30dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

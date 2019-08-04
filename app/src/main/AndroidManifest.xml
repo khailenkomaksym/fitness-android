@@ -13,13 +13,24 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/MyMaterialTheme">
-        <activity android:name="com.fitness.athome.ui.main.MainActivity">
+        <activity android:name="com.fitness.athome.ui.splash.SplashActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/splashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.auth.AuthActivity"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.user.data.EnterUserDataActivity"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.main.MainActivity"
+                android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

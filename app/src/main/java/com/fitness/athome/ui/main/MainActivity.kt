@@ -1,6 +1,8 @@
 package com.fitness.athome.ui.main
 
+import android.app.ProgressDialog.show
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -15,6 +17,7 @@ import com.fitness.athome.R
 import com.fitness.athome.storage.PreferencesHelper
 import com.fitness.athome.ui.dashboard.DashboardFragment
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -68,6 +71,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.setNavigationItemSelectedListener(this)
 
         onNavigationItemSelected(navigationView.menu.getItem(0))
+
+        /*runBlocking {
+            main()
+        }*/
+    }
+
+    /*suspend fun main() = coroutineScope {
+        launch {
+            delay(1000)
+            println("Kotlin Coroutines World!")
+        }
+        println("Hello")
+    }
+
+    fun onDocsNeeded() {
+        viewModelScope.launch {    // Dispatchers.Main
+            main()            // Dispatchers.Main (suspend function call)
+        }
+    }*/
+
+    suspend fun get(url: String) = withContext(Dispatchers.IO) {
+        Log.d("myLogs", "test")
     }
 
     fun replaceFragment(fragment: Fragment) {
