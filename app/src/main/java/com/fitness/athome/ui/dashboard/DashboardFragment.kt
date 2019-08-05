@@ -35,50 +35,10 @@ class DashboardFragment : Fragment() {
         val view: View =  inflater.inflate(R.layout.fragment_dashboard, container, false)
 
         dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        //dashboardViewModel = ViewModelProviders.of(this)[DashboardViewModel::class.java]
-
-        disposable = dashboardViewModel?.exercisesList?.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread())?.subscribe() {
-            val exercisesList: List<Exercises> = it
-            Log.d(LOG_TAG, "arch components: " + exercisesList.size)
-            Log.d(LOG_TAG, "arch components: " + exercisesList.get(0).title)
-        }
-
-        var workout: Workout = Workout(Date().time)
-
-        /*dashboardViewModel?.exercisesList?.observe(this, object: Observer<List<Exercises>> {
-            override fun onChanged(exercisesList: List<Exercises>?) {
-                Log.d(LOG_TAG, "arch components: " + exercisesList?.size)
-                Log.d(LOG_TAG, "arch components: " + exercisesList?.get(0)?.title)
-            }
-        })*/
-
-        /*var exercisesDatabase: ExercisesDatabase? = activity?.applicationContext?.let { ExercisesDatabase.getInstance(it) }
-
-        val exercisesList: List<Exercises> = exercisesDatabase?.exercisesDao()?.getAllExercises()!!
-
-        Toast.makeText(context, "Size: " + exercisesList.get(0).title, Toast.LENGTH_LONG).show()*/
-
 
         cardViewWater = view.findViewById(R.id.cardWater)
-        cardViewWater.setOnClickListener {
-
-        }
 
         return view;
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        //disposable.add()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        disposable?.dispose()
-
-        //disposable.clear()
     }
 
 }

@@ -10,12 +10,4 @@ import io.reactivex.Flowable
 
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val exercisesRepository: ExercisesRepository
-    internal val exercisesList: Flowable<List<Exercises>>
-
-    init {
-        exercisesRepository = ExercisesRepository(application)
-        exercisesList = exercisesRepository.getExercisesList()
-    }
-
 }
