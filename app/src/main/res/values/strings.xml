@@ -23,4 +23,19 @@
     <string name="auth_sign_in_with_google">Sign in with google</string>
     <string name="auth_title">Profile</string>
     <string name="loading">Loading...</string>
+    <string name="enter_user_data_done">Done</string>
+    <string name="enter_user_data_title">Information</string>
+    <string name="enter_user_data_name">Your name</string>
+    <string name="enter_user_data_goal">Your goal</string>
+    <string name="enter_user_data_activity">Your activity</string>
+    <string name="enter_user_data_enter_your_name">Enter your name</string>
+    <string name="enter_user_data_goal_lose_weight">Lose weight</string>
+    <string name="enter_user_data_goal_weight_maintenance">Weight maintenance</string>
+    <string name="enter_user_data_goal_weight_gain">Weight gain</string>
+    <string name="enter_user_data_activity_low">Low</string>
+    <string name="enter_user_data_activity_medium">Medium</string>
+    <string name="enter_user_data_activity_high">High</string>
+    <string name="enter_user_data_error_enter_name">Enter your name</string>
+    <string name="enter_user_data_error_choose_goal">Choose your goal</string>
+    <string name="enter_user_data_error_choose_activity">Choose your activity</string>
 </resources>

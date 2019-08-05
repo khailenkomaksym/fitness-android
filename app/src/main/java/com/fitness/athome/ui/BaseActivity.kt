@@ -6,6 +6,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import com.fitness.athome.R
 
 open class BaseActivity : AppCompatActivity() {
@@ -30,6 +31,10 @@ open class BaseActivity : AppCompatActivity() {
     fun hideKeyboard(view: View) {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     public override fun onStop() {

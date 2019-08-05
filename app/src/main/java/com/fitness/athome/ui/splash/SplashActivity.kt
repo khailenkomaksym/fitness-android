@@ -2,12 +2,12 @@ package com.fitness.athome.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.fitness.athome.App
-import com.fitness.athome.BuildConfig
-import com.fitness.athome.Constants.Companion.LOG_TAG
 import com.fitness.athome.R
+import com.fitness.athome.model.user_data.UserData
+import com.fitness.athome.repository.FirestoreRepository
 import com.fitness.athome.storage.PreferencesHelper
 import com.fitness.athome.ui.BaseActivity
 import com.fitness.athome.ui.auth.AuthActivity
@@ -25,6 +25,11 @@ class SplashActivity : BaseActivity() {
     @Inject
     lateinit var preferencesHelper: PreferencesHelper
 
+    @Inject
+    lateinit var firestoreRepository: FirestoreRepository
+
+    lateinit var splashViewModel: SplashViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -32,6 +37,8 @@ class SplashActivity : BaseActivity() {
         App.appComponent.injectsSplashActivity(this@SplashActivity)
 
         supportActionBar?.hide()
+
+        splashViewModel = ViewModelProviders.of(this, SplashViewModelFactory(firestoreRepository)).get(SplashViewModel::class.java)
 
         checkFirebaseUser()
     }
@@ -41,18 +48,9 @@ class SplashActivity : BaseActivity() {
         if (firebaseUser == null) {
             launchAuthActivity()
         } else {
-            launchNextActivity()
+            checkFirestoreUserData()
         }
 
-    }
-
-    fun signInAnonymous() {
-        firebaseAuth.signInAnonymously()
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    launchNextActivity()
-                }
-            }
     }
 
     fun launchAuthActivity() {
@@ -61,12 +59,18 @@ class SplashActivity : BaseActivity() {
         finish()
     }
 
-    fun launchNextActivity() {
-        if (preferencesHelper.isUserDataEnter() == true) {
-            launchMainActivity()
-        } else {
-            //launchEnterUserDataActivity()
-            launchMainActivity()
+    fun checkFirestoreUserData() {
+        firebaseAuth.currentUser.let {
+            it?.let {
+                splashViewModel.getUserDataInfo(it.uid).observe(this, Observer<UserData> {
+                    hideProgressDialog()
+                    if (it == null) {
+                        launchEnterUserDataActivity()
+                    } else {
+                        launchMainActivity()
+                    }
+                })
+            }
         }
     }
 

@@ -64,10 +64,6 @@ class DashboardFragment : Fragment() {
 
         }
 
-        cardViewWater.setOnClickListener({ v -> {
-            //...
-        } })
-
         return view;
     }
 

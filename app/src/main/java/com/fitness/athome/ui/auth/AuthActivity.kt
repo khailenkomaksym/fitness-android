@@ -16,7 +16,9 @@ import com.fitness.athome.App
 import com.fitness.athome.Constants.Companion.LOG_TAG
 import com.fitness.athome.Constants.Companion.RC_SIGN_IN
 import com.fitness.athome.R
+import com.fitness.athome.model.user_data.UserData
 import com.fitness.athome.repository.FirebaseAuthRepository
+import com.fitness.athome.repository.FirestoreRepository
 import com.fitness.athome.ui.BaseActivity
 import com.fitness.athome.ui.main.MainActivity
 import com.fitness.athome.ui.user.data.EnterUserDataActivity
@@ -28,6 +30,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 import javax.inject.Inject
 
@@ -46,6 +49,12 @@ class AuthActivity : BaseActivity() {
 
     @Inject
     lateinit var firebaseAuthRepository: FirebaseAuthRepository
+
+    @Inject
+    lateinit var firestoreRepository: FirestoreRepository
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,23 +88,18 @@ class AuthActivity : BaseActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        authViewModel = ViewModelProviders.of(this,
-            AuthViewModelFactory(firebaseAuthRepository)
-        ).get(AuthViewModel::class.java)
+        authViewModel = ViewModelProviders.of(this, AuthViewModelFactory(firebaseAuthRepository, firestoreRepository)).get(AuthViewModel::class.java)
 
         btnSignInFacebook = findViewById(R.id.btnSignInFacebook)
         btnSignInGoogle = findViewById(R.id.btnSignInGoogle)
         btnContinueAsGuest = findViewById(R.id.btnContinueAsGuest)
 
         authViewModel.authTask.observe(this, Observer<Task<AuthResult>> {
-                task ->
-            run {
-                if (task.isSuccessful) {
-                    hideProgressDialog()
-                    launchMainActivity()
-                } else {
-                    Toast.makeText(this@AuthActivity, "Error: " + task?.exception.toString(), Toast.LENGTH_SHORT).show()
-                }
+            if (it.isSuccessful) {
+                checkFirestoreUserData()
+            } else {
+                hideProgressDialog()
+                Toast.makeText(this@AuthActivity, "Error: " + it?.exception.toString(), Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -134,6 +138,21 @@ class AuthActivity : BaseActivity() {
         authViewModel.firebaseAuthWithAnonymous()
     }
 
+    fun checkFirestoreUserData() {
+        firebaseAuth.currentUser.let {
+            it?.let {
+                authViewModel.getUserDataInfo(it.uid).observe(this, Observer<UserData> {
+                    hideProgressDialog()
+                    if (it == null) {
+                        launchUserDataActivity()
+                    } else {
+                        launchMainActivity()
+                    }
+                })
+            }
+        }
+    }
+
     fun launchUserDataActivity() {
         val intent = Intent(this, EnterUserDataActivity::class.java)
         startActivity(intent)
@@ -153,13 +172,10 @@ class AuthActivity : BaseActivity() {
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!)
             } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
                 Log.w(LOG_TAG, "Google sign in failed", e)
-                // ...
             }
         }
     }

@@ -1,15 +1,10 @@
 package com.fitness.athome.ui.main
 
-import android.app.ProgressDialog.show
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.fitness.athome.App
@@ -17,8 +12,8 @@ import com.fitness.athome.R
 import com.fitness.athome.storage.PreferencesHelper
 import com.fitness.athome.ui.BaseActivity
 import com.fitness.athome.ui.dashboard.DashboardFragment
+import com.fitness.athome.ui.exercises.ExercisesListFragment
 import com.google.android.material.navigation.NavigationView
-import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -26,14 +21,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         p0.isChecked = true
         when (p0.itemId) {
             R.id.nav_dashboard -> {
+                setToolbarTitle(getString(R.string.nav_dashboard))
                 val dashboardFragment = DashboardFragment()
                 replaceFragment(dashboardFragment)
             }
             R.id.nav_exercises -> {
-                //Toast.makeText(this@MainActivity, "Menu2: " + p0.order, Toast.LENGTH_LONG).show()
+                setToolbarTitle(getString(R.string.nav_exercises))
+                val exercisesListFragment = ExercisesListFragment()
+                replaceFragment(exercisesListFragment)
             }
             else -> {
-                //Toast.makeText(this@MainActivity, "Menu3: " + p0.order, Toast.LENGTH_LONG).show()
             }
         }
 
@@ -72,28 +69,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         navigationView.setNavigationItemSelectedListener(this)
 
         onNavigationItemSelected(navigationView.menu.getItem(0))
-
-        /*runBlocking {
-            main()
-        }*/
     }
 
-    /*suspend fun main() = coroutineScope {
-        launch {
-            delay(1000)
-            println("Kotlin Coroutines World!")
-        }
-        println("Hello")
-    }
-
-    fun onDocsNeeded() {
-        viewModelScope.launch {    // Dispatchers.Main
-            main()            // Dispatchers.Main (suspend function call)
-        }
-    }*/
-
-    suspend fun get(url: String) = withContext(Dispatchers.IO) {
-        Log.d("myLogs", "test")
+    fun setToolbarTitle(title: String) {
+        supportActionBar?.title = title
     }
 
     fun replaceFragment(fragment: Fragment) {

@@ -16,8 +16,6 @@ class App : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        FacebookSdk.sdkInitialize(this)
-
         appComponent = DaggerAppComponent.builder()
             .sharedPreferencesModule(SharedPreferencesModule(applicationContext))
             .build()
