@@ -15,12 +15,13 @@ import androidx.fragment.app.Fragment
 import com.fitness.athome.App
 import com.fitness.athome.R
 import com.fitness.athome.storage.PreferencesHelper
+import com.fitness.athome.ui.BaseActivity
 import com.fitness.athome.ui.dashboard.DashboardFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         p0.isChecked = true
         when (p0.itemId) {

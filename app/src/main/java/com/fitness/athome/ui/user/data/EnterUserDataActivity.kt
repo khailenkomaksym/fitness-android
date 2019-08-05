@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.fitness.athome.R
+import com.fitness.athome.ui.BaseActivity
 
-class EnterUserDataActivity : AppCompatActivity() {
+class EnterUserDataActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

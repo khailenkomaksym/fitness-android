@@ -20,6 +20,12 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        manifestPlaceholders = [
+                FACEBOOK_APP_ID:getFacebookAppId(),
+                FACEBOOK_SECRET_KEY:getFacebookSecretKey()
+        ]
+        buildConfigField("String", "FACEBOOK_APP_ID", "\"" + getFacebookAppId() + "\"")
+        buildConfigField("String", "FACEBOOK_SECRET_KEY", "\"" + getFacebookSecretKey() + "\"")
     }
     buildTypes {
         release {
@@ -36,6 +42,18 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+static def getFacebookAppId(){
+    Properties props = new Properties()
+    props.load(new FileInputStream(new File('secrets.properties')))
+    return props['FACEBOOK_APP_ID']
+}
+
+static def getFacebookSecretKey(){
+    Properties props = new Properties()
+    props.load(new FileInputStream(new File('secrets.properties')))
+    return props['FACEBOOK_SECRET_KEY']
 }
 
 repositories {

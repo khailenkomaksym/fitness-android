@@ -15,8 +15,8 @@ class FirebaseAuthRepository(private val firebaseAuth: FirebaseAuth) {
         return firebaseAuth.signInWithCredential(credential)
     }
 
-    fun firebaseAuthWithGoogle(acct: GoogleSignInAccount): Task<AuthResult> {
-        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+    fun firebaseAuthWithGoogle(googleSignInAccount: GoogleSignInAccount): Task<AuthResult> {
+        val credential = GoogleAuthProvider.getCredential(googleSignInAccount.idToken, null)
         return firebaseAuth.signInWithCredential(credential)
     }
 

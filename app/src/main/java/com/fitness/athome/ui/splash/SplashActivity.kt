@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.fitness.athome.App
+import com.fitness.athome.BuildConfig
+import com.fitness.athome.Constants.Companion.LOG_TAG
 import com.fitness.athome.R
 import com.fitness.athome.storage.PreferencesHelper
+import com.fitness.athome.ui.BaseActivity
 import com.fitness.athome.ui.auth.AuthActivity
 import com.fitness.athome.ui.main.MainActivity
 import com.fitness.athome.ui.user.data.EnterUserDataActivity
@@ -14,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
@@ -43,14 +46,14 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
-    /*fun signInAnonymous() {
-        auth.signInAnonymously()
+    fun signInAnonymous() {
+        firebaseAuth.signInAnonymously()
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     launchNextActivity()
                 }
             }
-    }*/
+    }
 
     fun launchAuthActivity() {
         val intent = Intent(this, AuthActivity::class.java)
